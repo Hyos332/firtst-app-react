@@ -9,6 +9,7 @@
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 .todo-container.show {
@@ -431,4 +432,100 @@
     font-size: 0.75rem;
     min-width: 25px;
   }
+}
+
+.todo-desc-popup {
+  position: absolute;
+  min-width: 220px;
+  max-width: 320px;
+  background: #fffbe9;
+  color: #a63c1a;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(166,60,26,0.18), 0 1.5px 8px rgba(0,0,0,0.08);
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  z-index: 99999;
+  border: 2px solid #ffb347;
+  animation: popupFadeIn 0.08s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.todo-desc-arrow {
+  position: absolute;
+  left: 10px;
+  top: -12px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #ffb347;
+  filter: drop-shadow(0 2px 4px rgba(166,60,26,0.10));
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.trash-can-fixed {
+  position: fixed;
+  right: 40px;
+  bottom: 60px;
+  z-index: 100000;
+  opacity: 0;
+  transform: scale(0.7) translateY(40px);
+  transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+}
+.trash-can-fixed.show {
+  opacity: 1;
+  transform: scale(1.1) translateY(0);
+  animation: trashCanBounce 0.7s;
+}
+.trash-can-icon {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 4px 16px #a63c1a44);
+  transition: filter 0.2s;
+}
+@keyframes trashCanBounce {
+  0% { transform: scale(0.7) translateY(40px); }
+  60% { transform: scale(1.2) translateY(-10px); }
+  100% { transform: scale(1.1) translateY(0); }
+}
+
+.removing-to-trash {
+  animation: flyToTrash 0.9s cubic-bezier(0.4,0,0.2,1) forwards;
+  z-index: 10000;
+}
+@keyframes flyToTrash {
+  0% { opacity: 1; transform: translateX(0) scale(1); }
+  60% { opacity: 0.7; transform: translateX(60vw) scale(0.7) rotate(-8deg); }
+  100% { opacity: 0; transform: translateX(90vw) scale(0.3) rotate(12deg); }
+}
+
+.flying-task {
+  position: fixed;
+  z-index: 200000;
+  pointer-events: none;
+  transition: transform 0.9s cubic-bezier(0.4,0,0.2,1), opacity 0.7s;
+}
+.flying-task .flying-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  padding: 0.6rem 0.8rem;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1.5px solid #e2e8f0;
+  min-width: 120px;
+  min-height: 32px;
+}
+.flying-task.flying {
+  /* El transform se aplica inline */
+  opacity: 0;
 } 

@@ -1,0 +1,196 @@
+.home-bg-animated {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #a63c1a 0%, #ffb347 100%);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  z-index: 0;
+  animation: bgMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  z-index: 2;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1);
+}
+
+.home-container.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.home-header {
+  margin-bottom: 2rem;
+  animation: fadeInDown 1.2s 0.2s both;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #fff 40%, #ffb347 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+  transition: text-shadow 0.3s;
+}
+
+.home-title:hover {
+  text-shadow: 0 4px 24px #fff, 0 2px 8px #a63c1a;
+  cursor: pointer;
+}
+
+.home-content {
+  background: rgba(255,255,255,0.95);
+  color: #a63c1a;
+  border-radius: 24px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  box-shadow: 0 8px 32px rgba(166,60,26,0.18), 0 1.5px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  animation: fadeInUp 1.2s 0.4s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-welcome {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #a63c1a 60%, #ffb347 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.2) drop-shadow(0 0 8px #ffb347); }
+}
+
+.home-desc {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #a63c1a;
+  opacity: 0.8;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.home-desc:hover {
+  color: #ffb347;
+  opacity: 1;
+}
+
+.home-btn {
+  width: 100%;
+  padding: 1rem 0;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(90deg, #a63c1a 60%, #ffb347 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(166,60,26,0.10);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  animation: btnPop 1.2s 0.7s both;
+}
+
+@keyframes btnPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.home-btn.secondary {
+  background: #fff;
+  color: #a63c1a;
+  border: 2px solid #a63c1a;
+  box-shadow: 0 2px 12px rgba(255,179,71,0.10);
+}
+
+.home-btn:hover {
+  background: linear-gradient(90deg, #ffb347 0%, #a63c1a 100%);
+  color: #fff;
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255,179,71,0.18);
+  filter: brightness(1.1);
+}
+
+.home-btn.secondary:hover {
+  background: #a63c1a;
+  color: #fff;
+  border-color: #ffb347;
+  box-shadow: 0 8px 32px rgba(166,60,26,0.18);
+}
+
+.home-btn:active {
+  transform: scale(0.98);
+}
+
+/* Efecto de onda al hacer click */
+.home-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,179,71,0.25);
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1), height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s;
+  opacity: 0;
+  z-index: 1;
+}
+
+.home-btn:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .home-content {
+    min-width: 90vw;
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  }
+  .home-title {
+    font-size: 1.3rem;
+  }
+  .home-welcome {
+    font-size: 1.2rem;
+  }
+} 
