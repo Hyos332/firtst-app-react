@@ -1,0 +1,434 @@
+.todo-container {
+  max-width: 600px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.todo-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.todo-title {
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  background: white;
+}
+
+.todo-button {
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.todo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.todo-button:active {
+  transform: translateY(0);
+}
+
+.todo-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.filter-button {
+  padding: 0.4rem 0.8rem;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 6px;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.filter-button.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+  border: 1.5px solid transparent;
+}
+
+.todo-item:hover {
+  transform: translateX(5px) scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #e2e8f0;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex: 1;
+}
+
+.check-button {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.check-button:hover {
+  border-color: #3b82f6;
+  background: #f0f7ff;
+  transform: scale(1.1);
+}
+
+.check-button.checked {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+  animation: checkmark 0.3s ease-in-out;
+}
+
+.todo-text {
+  flex: 1;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin: 0 0.6rem;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.delete-button {
+  padding: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.delete-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Animación para elementos eliminados */
+.todo-item.removing {
+  animation: slideOut 0.3s ease-out forwards;
+}
+
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+.search-container {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  padding-left: 2.2rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  background: white;
+}
+
+.search-container::before {
+  content: '🔍';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  padding: 0.6rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.pagination-button {
+  padding: 0.4rem 0.8rem;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 6px;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-button:hover:not(:disabled) {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.pagination-button.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 1rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-top: 0.8rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Animación para la búsqueda */
+@keyframes searchPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.search-input:focus + .search-container::before {
+  animation: searchPulse 1s ease-in-out infinite;
+}
+
+/* Efecto de transición para las páginas */
+.todo-list {
+  transition: opacity 0.3s ease;
+}
+
+.todo-list.page-transition {
+  opacity: 0;
+}
+
+/* Estilo para el mensaje de búsqueda sin resultados */
+.no-tasks {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 2px solid #e2e8f0;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Efecto de hover para los botones de paginación */
+.pagination-button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Efecto de active para los botones de paginación */
+.pagination-button:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.1);
+}
+
+/* Estilo para el botón de página actual */
+.pagination-button.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-color: transparent;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Animación para el cambio de página */
+@keyframes pageTransition {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-list {
+  animation: pageTransition 0.3s ease-out;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .todo-container {
+    margin: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .todo-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .todo-filters {
+    flex-wrap: wrap;
+  }
+
+  .filter-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .pagination-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    min-width: 25px;
+  }
+} 
